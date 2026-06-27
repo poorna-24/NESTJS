@@ -1,0 +1,2 @@
+GET http://localhost:1111/users
+GET http://localhost:1111/users/125?limit=10&offset=20

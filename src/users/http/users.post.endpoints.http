@@ -2,9 +2,9 @@ POST http://localhost:1111/users
 Content-Type: application/json
 
 {
- // "firstName":"",
  "firstName":"chandu",
  "lastName":"terala",
  "email":"chandu@gmail.com",
  "password":"password@123"
+ // "isAuth":true
 }

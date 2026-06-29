@@ -11,6 +11,7 @@ import {
   DefaultValuePipe,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
+import { GetUsersParamDto } from './dtos/get-usersParam.dto';
 
 @Controller('users')
 export class UsersController {
@@ -33,12 +34,14 @@ export class UsersController {
   @Get('/:id')
   // @Get('/:id/:pp')
   public getUsers(
-    @Param('id', ParseIntPipe) id: number | undefined,
+    @Param() getUsersParamDto: GetUsersParamDto,
+    // @Param('id', ParseIntPipe) id: number | undefined,
     // @Param('pp',ParseIntPipe) pp:number,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
   ) {
-    console.log(id);
+    console.log(getUsersParamDto)
+    // console.log(id);
     // console.log(pp);
 
     // console.log(typeof id);

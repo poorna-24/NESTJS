@@ -5,11 +5,13 @@ import {
   Param,
   Query,
   Body,
-  Headers,
-  Ip,
+  // Headers,
+  // Ip,
   ParseIntPipe,
   DefaultValuePipe,
+  ValidationPipe,
 } from '@nestjs/common';
+import { CreateUserDto } from './dtos/create-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -69,14 +71,17 @@ export class UsersController {
 
   @Post()
   public createUsers(
-    @Body() request: any,
-    @Headers() headers: any,
-    @Ip() ip: any,
+    @Body(new ValidationPipe()) createUserDto: CreateUserDto,
+    // @Body(new ValidationPipe()) requestCreateUserDto: CreateUserDto,
+    // @Headers() headers: any,
+    // @Ip() ip: any,
   ) {
-    console.log(request);
-    console.log(headers);
-    console.log(ip);
-    return ' from POST';
+    // console.log(request);
+    // console.log(requestCreateUserDto)
+    console.log(createUserDto);
+    // console.log(headers);
+    // console.log(ip);
+    return ' from POST createUsers';
   }
 
   // @Get('/:id/{:optional}')

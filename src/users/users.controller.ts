@@ -5,11 +5,15 @@ import {
   Param,
   Query,
   Body,
-  Headers,
-  Ip,
+  // Headers,
+  // Ip,
   ParseIntPipe,
   DefaultValuePipe,
+  Patch,
 } from '@nestjs/common';
+import { CreateUserDto } from './dtos/create-user.dto';
+import { GetUsersParamDto } from './dtos/get-usersParam.dto';
+import { PatchUserDto } from './dtos/patch-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -32,12 +36,14 @@ export class UsersController {
   @Get('/:id')
   // @Get('/:id/:pp')
   public getUsers(
-    @Param('id', ParseIntPipe) id: number | undefined,
+    @Param() getUsersParamDto: GetUsersParamDto,
+    // @Param('id', ParseIntPipe) id: number | undefined,
     // @Param('pp',ParseIntPipe) pp:number,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
   ) {
-    console.log(id);
+    console.log(getUsersParamDto);
+    // console.log(id);
     // console.log(pp);
 
     // console.log(typeof id);
@@ -69,14 +75,19 @@ export class UsersController {
 
   @Post()
   public createUsers(
-    @Body() request: any,
-    @Headers() headers: any,
-    @Ip() ip: any,
+    @Body() createUserDto: CreateUserDto,
+    // @Body(new ValidationPipe()) requestCreateUserDto: CreateUserDto,
+    // @Headers() headers: any,
+    // @Ip() ip: any,
   ) {
-    console.log(request);
-    console.log(headers);
-    console.log(ip);
-    return ' from POST';
+    // console.log(request);
+    // console.log(requestCreateUserDto)
+    console.log(createUserDto);
+    // console.log(createUserDto instanceof CreateUserDto);
+    // console.log(typeof createUserDto);
+    // console.log(headers);
+    // console.log(ip);
+    return ' from POST createUsers';
   }
 
   // @Get('/:id/{:optional}')
@@ -100,4 +111,10 @@ export class UsersController {
   //   return 'You sent a get request to user endpoint';
   // }
   // @Get('/:id/{:optional?}')
+
+  @Patch()
+  public patchUser(@Body() patchUserDto: PatchUserDto) {
+    console.log(patchUserDto);
+    return patchUserDto;
+  }
 }

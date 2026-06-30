@@ -9,9 +9,11 @@ import {
   // Ip,
   ParseIntPipe,
   DefaultValuePipe,
+  Patch,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-usersParam.dto';
+import { PatchUserDto } from './dtos/patch-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -40,7 +42,7 @@ export class UsersController {
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
   ) {
-    console.log(getUsersParamDto)
+    console.log(getUsersParamDto);
     // console.log(id);
     // console.log(pp);
 
@@ -109,4 +111,10 @@ export class UsersController {
   //   return 'You sent a get request to user endpoint';
   // }
   // @Get('/:id/{:optional?}')
+
+  @Patch()
+  public patchUser(@Body() patchUserDto: PatchUserDto) {
+    console.log(patchUserDto);
+    return patchUserDto;
+  }
 }

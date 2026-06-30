@@ -10,3 +10,5 @@ $ npm run format
 DTO
 class-validator
 class-transformer
+
+npm i @nestjs/mapped-types

@@ -14,9 +14,13 @@ import {
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-usersParam.dto';
 import { PatchUserDto } from './dtos/patch-user.dto';
+import { UsersService } from './providers/users.service';
 
 @Controller('users')
 export class UsersController {
+
+constructor(private readonly usersService:UsersService){}
+
   // // GET /users
   // @Get('/')
   // public getAllUsers(@Query('limit') limit: any) {
@@ -53,7 +57,8 @@ export class UsersController {
     console.log(limit, page);
     //  console.log(typeof limit,limit)
     // console.log('chandu');
-    return `You sent a get request to users endpoint with...........`;
+    // return `You sent a get request to users endpoint with...........`;
+    return this.usersService.findAll(getUsersParamDto,limit,page)
   }
 
   // // GET /users5
